@@ -132,7 +132,7 @@ export const MagicTextReveal: React.FC<MagicTextRevealProps> = ({
             y: y + Math.sin(angle) * distance,
             originalX: x, originalY: y,
             color: `rgba(${data[index]}, ${data[index + 1]}, ${data[index + 2]}, ${originalAlpha})`,
-            opacity: originalAlpha * 0.3, originalAlpha,
+            opacity: originalAlpha * 0.7, originalAlpha,
             velocityX: 0, velocityY: 0,
             angle: Math.random() * Math.PI * 2, speed: 0,
             floatingOffsetX: 0, floatingOffsetY: 0,
@@ -195,7 +195,7 @@ export const MagicTextReveal: React.FC<MagicTextRevealProps> = ({
         const opacityDiff = particle.targetOpacity - particle.opacity;
         particle.opacity += opacityDiff * particle.sparkleSpeed * deltaTime * 3;
         if (Math.abs(opacityDiff) < 0.01) {
-          particle.targetOpacity = Math.random() < 0.5 ? Math.random() * 0.1 * particle.originalAlpha : particle.originalAlpha * 3;
+          particle.targetOpacity = Math.random() < 0.5 ? Math.random() * 0.5 * particle.originalAlpha : particle.originalAlpha * 2;
           particle.sparkleSpeed = Math.random() * 3 + 1;
         }
       }

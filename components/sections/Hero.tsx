@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
+import { MagicTextReveal } from '@/components/ui/magic-text-reveal'
 import ParticleCanvas from '@/components/ui/ParticleCanvas'
 import TextRotate from '@/components/ui/TextRotate'
 import { IMAGES, VIDEO, WA_LINKS } from '@/lib/constants'
@@ -27,8 +28,15 @@ function VideoHero() {
 export default function Hero() {
   const productRef = useMouseParallax<HTMLDivElement>(0.022)
   const [mounted, setMounted] = useState(false)
+  const [heroFontSize, setHeroFontSize] = useState(120)
 
-  useEffect(() => { setMounted(true) }, [])
+  useEffect(() => {
+    setMounted(true)
+    const updateSize = () => setHeroFontSize(window.innerWidth < 768 ? 48 : 120)
+    updateSize()
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
 
   return (
     <section
@@ -38,7 +46,7 @@ export default function Hero() {
     >
       {/* Background image */}
       <Image
-        src={IMAGES.fondoHero}
+        src="/images/fondo-web.png"
         alt=""
         fill
         priority
@@ -77,12 +85,14 @@ export default function Hero() {
         {/* ── Title block with floating product ── */}
         <div className="relative w-full max-w-[95vw] md:max-w-5xl mx-auto select-none">
 
-          {/* TRILOGÍA — main display word */}
+          {/* TRILOGÍA — main display word with hover effect */}
           <h1
             aria-label="Trilogía A-Natural"
             className="font-display font-black hero-display text-charcoal/[0.82] leading-none"
           >
-            TRILOGÍA
+            {'TRILOGÍA'.split('').map((letter, i) => (
+              <span key={i}>{letter}</span>
+            ))}
           </h1>
 
           {/* A·Natural — secondary display */}
