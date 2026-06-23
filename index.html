@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trilogía A-Natural — Kit Capilar Natural</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --verde: #2d5016;
+      --verde-medio: #4a7c2a;
+      --verde-claro: #8ab85a;
+      --crema: #f5f0e8;
+      --crema-oscuro: #ede5d4;
+      --tierra: #a0845c;
+      --texto: #1a1a1a;
+      --texto-suave: #555;
+      --blanco: #fff;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--blanco); color: var(--texto); line-height: 1.65; }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .ann-bar {
+      background: var(--verde);
+      color: var(--blanco);
+      text-align: center;
+      padding: .6rem 3rem;
+      font-size: .81rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      position: relative;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ann-bar button {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--blanco);
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: .65;
+      line-height: 1;
+    }
+    .ann-bar button:hover { opacity: 1; }
+    .ann-msg { display: none; }
+    .ann-msg.active { display: inline; }
+
+    /* ── STICKY PRODUCT BAR ── */
+    .sticky-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      background: var(--blanco);
+      border-bottom: 1px solid var(--crema-oscuro);
+      box-shadow: 0 2px 20px rgba(0,0,0,.1);
+      transform: translateY(-110%);
+      transition: transform .3s ease;
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      height: 66px;
+    }
+    .sticky-thumb {
+      width: 42px; height: 42px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--verde), var(--verde-claro));
+    }
+    .sticky-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .sticky-meta { flex: 1; min-width: 0; }
+    .sticky-meta .brand { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave); }
+    .sticky-meta .name { font-size: .9rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sticky-price { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: var(--verde); white-space: nowrap; }
+    .sticky-cta {
+      background: var(--verde);
+      color: var(--blanco);
+      padding: .65rem 1.5rem;
+      text-decoration: none;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .sticky-cta:hover { background: var(--verde-medio); }
+
+    /* ── GLOBAL HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--crema-oscuro);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      text-decoration: none;
+      color: var(--verde);
+      flex-shrink: 0;
+    }
+    .logo img { height: 38px; border-radius: 50%; object-fit: cover; }
+    .logo-name { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; letter-spacing: .03em; }
+    .header-nav { display: flex; gap: 2.25rem; list-style: none; }
+    .header-nav a {
+      text-decoration: none;
+      color: var(--texto-suave);
+      font-size: .84rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .header-nav a:hover { color: var(--verde); }
+    .header-cta {
+      background: var(--verde);
+      color: var(--blanco);
+      padding: .5rem 1.25rem;
+      text-decoration: none;
+      font-size: .83rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      transition: background .2s;
+    }
+    .header-cta:hover { background: var(--verde-medio); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: calc(100vh - 104px);
+    }
+
+    /* gallery side */
+    .hero-gallery {
+      background: var(--crema);
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-main-img {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 3rem 2rem;
+      min-height: 480px;
+    }
+    .hero-main-img img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      display: block;
+    }
+    .img-placeholder {
+      width: 100%;
+      min-height: 440px;
+      background: linear-gradient(155deg, var(--crema-oscuro) 0%, var(--verde-claro) 55%, var(--verde) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      color: rgba(255,255,255,.55);
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      letter-spacing: .06em;
+      text-align: center;
+    }
+    .hero-thumbs {
+      display: flex;
+      gap: .65rem;
+      padding: 1rem 2.5rem 1.5rem;
+      background: var(--crema);
+      border-top: 1px solid var(--crema-oscuro);
+    }
+    .thumb {
+      width: 70px; height: 70px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: border-color .2s;
+    }
+    .thumb.active { border-color: var(--verde); }
+    .thumb-ph {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--verde-claro), var(--verde));
+    }
+
+    /* info side */
+    .hero-info {
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--blanco);
+      border-left: 1px solid var(--crema-oscuro);
+    }
+    .hero-collection {
+      font-size: .76rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-bottom: .75rem;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: 1.2;
+      color: var(--texto);
+      margin-bottom: .65rem;
+    }
+    .hero-subtitle {
+      font-size: .9rem;
+      color: var(--texto-suave);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .hero-format-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--crema-oscuro);
+    }
+    .hero-format { font-size: .86rem; color: var(--texto-suave); }
+    .hero-price { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 600; color: var(--verde); }
+    .btn-add {
+      display: block;
+      width: 100%;
+      background: var(--verde);
+      color: var(--blanco);
+      text-align: center;
+      padding: 1.05rem;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+      margin-bottom: 1.35rem;
+    }
+    .btn-add:hover { background: var(--verde-medio); }
+    .btn-secondary-link {
+      display: block;
+      text-align: center;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--texto);
+      font-size: .86rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      margin-bottom: 1.75rem;
+      transition: color .2s;
+    }
+    .btn-secondary-link:hover { color: var(--verde); }
+    .hero-help {
+      font-size: .83rem;
+      color: var(--texto-suave);
+      margin-bottom: 1.75rem;
+    }
+    .hero-help a { color: var(--texto); text-decoration: underline; text-underline-offset: 2px; }
+    .hero-perks {
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--crema-oscuro);
+    }
+    .perk {
+      display: flex;
+      align-items: flex-start;
+      gap: .7rem;
+      font-size: .84rem;
+      color: var(--texto-suave);
+    }
+    .perk-ico { width: 20px; height: 20px; flex-shrink: 0; color: var(--verde-claro); margin-top: .15rem; }
+    .perk a { color: var(--verde); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── CENTERED SECTION ── */
+    .sec-centered {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 5.5rem 2rem;
+    }
+    .eyebrow {
+      font-size: .76rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-bottom: .9rem;
+    }
+    .sec-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      line-height: 1.2;
+      color: var(--texto);
+      margin-bottom: 1.25rem;
+    }
+    .sec-body {
+      color: var(--texto-suave);
+      font-size: .96rem;
+      line-height: 1.85;
+    }
+    .expand-btn {
+      background: none;
+      border: none;
+      display: inline-block;
+      margin-top: .85rem;
+      color: var(--texto);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-size: .86rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+    .expand-btn:hover { color: var(--verde); }
+
+    /* ── STATS SPLIT ── */
+    .stats-split { display: grid; grid-template-columns: 1fr 1fr; }
+    .stats-img {
+      min-height: 540px;
+      background: linear-gradient(155deg, var(--crema-oscuro), var(--verde-claro) 50%, var(--verde));
+      overflow: hidden;
+    }
+    .stats-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .stats-content {
+      background: var(--crema);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4.5rem;
+    }
+    .stats-eyebrow { font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--tierra); margin-bottom: .9rem; }
+    .stats-pre { font-size: .93rem; color: var(--texto-suave); margin-bottom: .5rem; }
+    .stats-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--verde);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .stats-note { font-size: .76rem; color: var(--texto-suave); opacity: .7; line-height: 1.6; }
+
+    /* ── BENEFIT CARDS ── */
+    .benefit-cards { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .benefit-card {
+      background: var(--crema);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--crema-oscuro);
+    }
+    .benefit-card:last-child { border-right: none; }
+    .benefit-ico {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      border: 1.5px solid var(--verde-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-size: 1.5rem;
+    }
+    .benefit-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--texto);
+      margin-bottom: .45rem;
+    }
+    .benefit-note { font-size: .78rem; color: var(--texto-suave); opacity: .75; line-height: 1.55; }
+
+    /* ── TECH SECTION (Aceite) ── */
+    .tech-split { display: grid; grid-template-columns: 1fr 1fr; }
+    .tech-content {
+      padding: 5rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--blanco);
+    }
+    .tech-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: 1.25;
+      color: var(--texto);
+      margin-bottom: 1.5rem;
+    }
+    .tech-body { font-size: .94rem; color: var(--texto-suave); line-height: 1.85; margin-bottom: .85rem; }
+    .tech-img {
+      min-height: 560px;
+      background: linear-gradient(160deg, var(--verde) 0%, var(--verde-claro) 55%, var(--crema-oscuro) 100%);
+      overflow: hidden;
+    }
+    .tech-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── PRODUCTOS CARDS ── */
+    .products-section { padding: 5rem 2rem; background: var(--blanco); }
+    .products-inner { max-width: 1100px; margin: 0 auto; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .product-card {
+      border: 1.5px solid var(--crema-oscuro);
+      padding: 0;
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .product-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+    .product-card-img {
+      height: 200px;
+      background: linear-gradient(135deg, var(--crema), var(--verde-claro));
+      overflow: hidden;
+    }
+    .product-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .product-card-body { padding: 1.5rem; }
+    .product-card h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400; color: var(--verde); margin-bottom: .4rem; }
+    .product-card p { font-size: .87rem; color: var(--texto-suave); margin-bottom: 1rem; line-height: 1.6; }
+    .tag { display: inline-block; background: var(--crema-oscuro); color: var(--verde); font-size: .71rem; padding: .2rem .65rem; border-radius: 50px; margin-right: .3rem; margin-top: .25rem; letter-spacing: .03em; }
+
+    /* ── CAROUSEL (Cómo usar) ── */
+    .uso-section { padding: 5.5rem 2rem; background: var(--crema); text-align: center; }
+    .uso-inner { max-width: 860px; margin: 0 auto; }
+    .uso-carousel { position: relative; overflow: hidden; margin-top: 3.5rem; }
+    .uso-slides { display: flex; transition: transform .4s ease; }
+    .uso-slide { min-width: 100%; padding: 0 5rem; }
+    .slide-num {
+      font-family: var(--font-serif);
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--verde-claro);
+      opacity: .3;
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .slide-title {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--verde);
+      margin-bottom: 1.1rem;
+    }
+    .slide-body { font-size: .96rem; color: var(--texto-suave); max-width: 580px; margin: 0 auto; line-height: 1.85; }
+    .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 3rem; }
+    .c-arrow {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: 1.5px solid var(--verde);
+      background: none;
+      cursor: pointer;
+      color: var(--verde);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, color .2s;
+    }
+    .c-arrow:hover { background: var(--verde); color: var(--blanco); }
+    .c-dots { display: flex; gap: .6rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--crema-oscuro); cursor: pointer; transition: background .2s; }
+    .dot.active { background: var(--verde); }
+
+    /* ── PRICING ── */
+    .pricing-section { padding: 5.5rem 2rem; background: var(--blanco); }
+    .pricing-inner { max-width: 1100px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem; }
+    .price-card { border: 1.5px solid var(--crema-oscuro); padding: 2rem 1.75rem; }
+    .price-card.featured { background: var(--verde); color: var(--blanco); border-color: var(--verde); }
+    .rec-badge { display: inline-block; background: var(--verde-claro); color: var(--blanco); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; padding: .28rem .75rem; border-radius: 50px; margin-bottom: .9rem; }
+    .price-name { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; margin-bottom: .3rem; }
+    .price-sub { font-size: .82rem; opacity: .65; margin-bottom: 1.4rem; }
+    .price-amount { font-family: var(--font-serif); font-size: 2.6rem; font-weight: 300; line-height: 1; margin-bottom: .2rem; }
+    .price-cur { font-size: .88rem; vertical-align: top; margin-top: .45rem; display: inline-block; }
+    .price-cop { font-size: .8rem; opacity: .6; margin-bottom: 1.5rem; }
+    .price-features { list-style: none; padding: 0; margin-bottom: 1.75rem; }
+    .price-features li { font-size: .87rem; padding: .4rem 0; border-bottom: 1px solid rgba(0,0,0,.07); }
+    .price-card.featured .price-features li { border-bottom-color: rgba(255,255,255,.12); }
+    .price-features li::before { content: '✓  '; opacity: .55; }
+    .btn-buy {
+      display: block;
+      text-align: center;
+      padding: .85rem;
+      font-size: .82rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .price-card:not(.featured) .btn-buy { border: 1.5px solid var(--verde); color: var(--verde); }
+    .price-card:not(.featured) .btn-buy:hover { background: var(--verde); color: var(--blanco); }
+    .price-card.featured .btn-buy { background: var(--blanco); color: var(--verde); }
+    .price-card.featured .btn-buy:hover { background: var(--crema); }
+    .pricing-note { text-align: center; font-size: .84rem; color: var(--texto-suave); margin-top: 1.5rem; }
+
+    /* ── PAYMENT ── */
+    .payment-section { padding: 4.5rem 2rem; background: var(--crema); }
+    .payment-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.75rem; text-align: left; }
+    .pay-card { background: var(--blanco); padding: 1.75rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .pay-ico { width: 46px; height: 46px; background: var(--verde); color: var(--blanco); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .pay-card h4 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--verde); margin-bottom: .3rem; }
+    .pay-card p { font-size: .86rem; color: var(--texto-suave); line-height: 1.5; }
+    .pay-key { font-weight: 600; color: var(--texto); }
+
+    /* ── CTA SECTION ── */
+    .cta-section { background: var(--verde); color: var(--blanco); text-align: center; padding: 6.5rem 2rem; }
+    .cta-section .sec-title { color: var(--blanco); }
+    .cta-section p { opacity: .78; margin-bottom: 2.5rem; font-size: .96rem; }
+    .contact-row { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2.75rem; }
+    .contact-item small { display: block; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; opacity: .55; margin-bottom: .35rem; }
+    .contact-item a { color: var(--blanco); text-decoration: none; font-size: .97rem; }
+    .contact-item a:hover { opacity: .7; }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      background: #25d366;
+      color: var(--blanco);
+      padding: 1.1rem 2.5rem;
+      text-decoration: none;
+      font-size: .88rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: background .2s, transform .15s;
+    }
+    .btn-wa:hover { background: #1fb558; transform: translateY(-2px); }
+    .btn-wa svg { width: 22px; height: 22px; fill: currentColor; flex-shrink: 0; }
+    .cta-note { font-size: .8rem; opacity: .5; margin-top: 1.25rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--texto); color: rgba(255,255,255,.42); text-align: center; padding: 2rem; font-size: .81rem; }
+    footer a { color: rgba(255,255,255,.42); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,.7); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-gallery { order: -1; }
+      .hero-main-img { min-height: 300px; padding: 2rem 2rem 1.5rem; }
+      .hero-info { padding: 2.5rem 1.75rem; border-left: none; border-top: 1px solid var(--crema-oscuro); }
+      .stats-split, .tech-split { grid-template-columns: 1fr; }
+      .stats-img, .tech-img { min-height: 280px; }
+      .stats-content, .tech-content { padding: 3.5rem 2rem; }
+      .benefit-cards { grid-template-columns: 1fr; }
+      .benefit-card { border-right: none; border-bottom: 1px solid var(--crema-oscuro); }
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .payment-grid { grid-template-columns: 1fr; }
+      .header-nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .contact-row { gap: 1.5rem; }
+      .uso-slide { padding: 0 1.5rem; }
+      .sec-centered { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── ANNOUNCEMENT BAR ── -->
+<div class="ann-bar" id="annBar">
+  <span class="ann-msg active" id="ann0">Envío a toda Colombia · Escríbenos por WhatsApp</span>
+  <span class="ann-msg" id="ann1">100% Natural · Fórmula Homeopática · Sin químicos agresivos</span>
+  <span class="ann-msg" id="ann2">Kit completo: Shampoo + Acondicionador + Aceite · $70.000 COP</span>
+  <button onclick="document.getElementById('annBar').style.display='none'" aria-label="Cerrar">×</button>
+</div>
+
+<!-- ── STICKY PRODUCT BAR ── -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-inner">
+    <div class="sticky-thumb">
+      <img src="https://trilogia-a-natural.netlify.app/assets/images/logo-closeup.png" alt="Kit Trilogía" />
+    </div>
+    <div class="sticky-meta">
+      <div class="brand">Trilogía A-Natural</div>
+      <div class="name">Kit Capilar Natural · Shampoo + Acondicionador + Aceite</div>
+    </div>
+    <div class="sticky-price">$70.000 COP</div>
+    <a class="sticky-cta" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Kit%20Trilog%C3%ADa%20A-Natural%20%28%2470.000%29%20%F0%9F%8C%BF">
+      Comprar kit
+    </a>
+  </div>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#inicio">
+      <img src="https://trilogia-a-natural.netlify.app/assets/images/logo-closeup.png" alt="Logo Trilogía A-Natural" />
+      <span class="logo-name">Trilogía A-Natural</span>
+    </a>
+    <ul class="header-nav">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#aceite">Aceite capilar</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#pago">Métodos de pago</a></li>
+      <li><a href="#uso">Cómo usar</a></li>
+    </ul>
+    <a class="header-cta" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Kit%20Trilog%C3%ADa%20A-Natural%20%28%2470.000%29%20%F0%9F%8C%BF">
+      Comprar ahora
+    </a>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section id="inicio" class="hero">
+
+  <!-- Galería izquierda -->
+  <div class="hero-gallery">
+    <div class="hero-main-img" id="mainImgWrap">
+      <img src="images/img4.jpg" alt="Kit Trilogía A-Natural — Shampoo, Acondicionador y Aceite Capilar" />
+    </div>
+    <div class="hero-thumbs">
+      <div class="thumb active" onclick="switchThumb(0,this)">
+        <img src="images/img4.jpg" alt="Kit completo" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="thumb" onclick="switchThumb(1,this)">
+        <img src="images/img5.jpg" alt="Shampoo" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="thumb" onclick="switchThumb(2,this)">
+        <img src="images/img3.jpg" alt="Acondicionador" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="thumb" onclick="switchThumb(3,this)">
+        <img src="images/img6.jpg" alt="Aceite capilar" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Info derecha -->
+  <div class="hero-info">
+    <div class="hero-collection">Trilogía A-Natural</div>
+    <h1 class="hero-title">Kit Capilar<br>Natural &amp; Homeopático</h1>
+    <p class="hero-subtitle">Shampoo + Acondicionador + Aceite capilar para el fortalecimiento y protección del cuero cabelludo</p>
+
+    <div class="hero-format-price">
+      <span class="hero-format">Kit completo · 3 productos</span>
+      <span class="hero-price">$70.000 COP</span>
+    </div>
+
+    <a class="btn-add" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Kit%20Trilog%C3%ADa%20A-Natural%20%28%2470.000%29%20%F0%9F%8C%BF">
+      Comprar kit completo
+    </a>
+
+    <a class="btn-secondary-link" href="#precios">Ver precios individuales</a>
+
+    <div class="hero-help">
+      ¿Necesitas ayuda? &nbsp;
+      <a href="https://wa.me/573002710490">+57 300 271 0490</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:trilogia.a.natural@gmail.com">trilogia.a.natural@gmail.com</a>
+    </div>
+
+    <div class="hero-perks">
+      <div class="perk">
+        <svg class="perk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
+        </svg>
+        Envío a toda Colombia
+      </div>
+      <div class="perk">
+        <svg class="perk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Fórmula 100% natural y homeopática · Sin químicos agresivos
+      </div>
+      <div class="perk">
+        <svg class="perk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758"/>
+        </svg>
+        <a href="#aceite">Trilogía A-Natural se compromete con lo natural →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DESCRIPCIÓN ── -->
+<div class="sec-centered">
+  <div class="eyebrow">El Kit</div>
+  <h2 class="sec-title">Fortalece el cuero cabelludo<br>y cuida tu fibra capilar</h2>
+  <p class="sec-body">
+    El Kit Trilogía A-Natural combina tres productos 100% naturales con enfoque homeopático, diseñados para trabajar en sinergia como rutina completa. El shampoo limpia suavemente mientras fortalece el cuero cabelludo; el acondicionador protege y aporta suavidad; el aceite nutre profundamente desde la raíz.
+  </p>
+  <div id="desc-extra" style="display:none">
+    <p class="sec-body" style="margin-top:1rem">
+      Juntos actúan para reducir la caída, estimular el crecimiento y mejorar el brillo y la salud del cabello desde adentro hacia afuera. Una rutina simple, sin complicaciones, con ingredientes que la naturaleza ya preparó para ti.
+    </p>
+  </div>
+  <button class="expand-btn" id="expandBtn" onclick="toggleDesc()">Mostrar más +</button>
+</div>
+
+<!-- ── STATS SPLIT ── -->
+<div class="stats-split">
+  <div class="stats-img">
+    <img src="images/img7.jpg" alt="Aceite capilar Trilogía A-Natural en uso" />
+  </div>
+  <div class="stats-content">
+    <div class="stats-eyebrow">Resultados observados</div>
+    <p class="stats-pre">Desde la primera semana de uso continuo, el cabello luce</p>
+    <div class="stats-headline">Más suave,<br>brillante y<br>con menos caída</div>
+    <p class="stats-note">Fórmula homeopática · Extractos 100% naturales<br>Sin sulfatos ni parabenos agresivos</p>
+  </div>
+</div>
+
+<!-- ── BENEFIT CARDS ── -->
+<div class="benefit-cards">
+  <div class="benefit-card">
+    <div class="benefit-ico">🌿</div>
+    <div class="benefit-title">Cabello Fortalecido</div>
+    <p class="benefit-note">Fibra capilar más resistente desde la raíz</p>
+  </div>
+  <div class="benefit-card">
+    <div class="benefit-ico">✨</div>
+    <div class="benefit-title">Cabello Brillante</div>
+    <p class="benefit-note">Nutrición e hidratación profunda que se nota</p>
+  </div>
+  <div class="benefit-card">
+    <div class="benefit-ico">💧</div>
+    <div class="benefit-title">Cuero Cabelludo Sano</div>
+    <p class="benefit-note">Equilibrio natural del cuero cabelludo revitalizado</p>
+  </div>
+</div>
+
+<!-- ── ACEITE (TECH SECTION) ── -->
+<div class="tech-split" id="aceite">
+  <div class="tech-content">
+    <div class="eyebrow">✨ Producto estrella</div>
+    <h2 class="tech-title">El Aceite Capilar<br><em style="font-style:italic">Trilogía Natural</em></h2>
+    <p class="tech-body">
+      Diseñado para nutrir profundamente el cuero cabelludo y fortalecer la fibra capilar desde la raíz hasta las puntas. Su función principal es <strong>estimular el crecimiento del cabello</strong> y disminuir la caída.
+    </p>
+    <p class="tech-body">
+      Combina extractos naturales con vitaminas, antioxidantes y ácidos grasos esenciales. Aplicado con masaje suave, activa la microcirculación para que los nutrientes lleguen mejor al folículo piloso.
+    </p>
+    <p class="tech-body">
+      <strong>Modo de uso:</strong> Aplica la noche anterior al lavado, directamente en el cuero cabelludo, con masajes suaves. Al día siguiente lava con shampoo y acondicionador Trilogía.
+    </p>
+  </div>
+  <div class="tech-img">
+    <img src="images/img6.jpg" alt="Aceite capilar Trilogía A-Natural" />
+  </div>
+</div>
+
+<!-- ── PRODUCTOS ── -->
+<section id="productos" class="products-section">
+  <div class="products-inner">
+    <div style="text-align:center">
+      <div class="eyebrow">Los tres productos</div>
+      <h2 class="sec-title">La Trilogía</h2>
+      <p style="color:var(--texto-suave);font-size:.95rem">Tres productos que funcionan como una rutina: base, soporte y nutrición.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="images/img5.jpg" alt="Shampoo Natural Trilogía" />
+        </div>
+        <div class="product-card-body">
+          <h3>Shampoo Natural</h3>
+          <p>Limpieza suave enfocada en fortalecer y cuidar el cuero cabelludo, manteniendo el equilibrio natural del cabello.</p>
+          <span class="tag">Fortalecimiento</span>
+          <span class="tag">Cuero cabelludo</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="images/img3.jpg" alt="Acondicionador Natural Trilogía" />
+        </div>
+        <div class="product-card-body">
+          <h3>Acondicionador Natural</h3>
+          <p>Apoya la suavidad y el manejo del cabello, aportando protección a la fibra capilar desde la raíz.</p>
+          <span class="tag">Protección</span>
+          <span class="tag">Suavidad</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="images/img6.jpg" alt="Aceite Capilar Trilogía" />
+        </div>
+        <div class="product-card-body">
+          <h3>Aceite Capilar</h3>
+          <p>Nutre profundamente, estimula el crecimiento y fortalece la fibra capilar desde la raíz hasta las puntas.</p>
+          <span class="tag">Crecimiento</span>
+          <span class="tag">Anti-caída</span>
+          <span class="tag">Nutrición profunda</span>
+          <br><a href="#aceite" style="display:inline-block;margin-top:.85rem;font-size:.82rem;color:var(--verde);text-decoration:underline;text-underline-offset:3px">Ver información completa →</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="images/img4.jpg" alt="Kit completo Trilogía" />
+        </div>
+        <div class="product-card-body">
+          <h3>Kit Completo</h3>
+          <p>Rutina capilar completa con shampoo, acondicionador y aceite capilar. La mejor relación precio-beneficio.</p>
+          <span class="tag">Rutina completa</span>
+          <span class="tag">Mejor precio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CÓMO USAR (CAROUSEL) ── -->
+<section id="uso" class="uso-section">
+  <div class="uso-inner">
+    <div class="eyebrow">Rutina de uso</div>
+    <h2 class="sec-title">Cómo se usa</h2>
+    <p class="sec-body">Simple, sin complicaciones. Tres pasos para un cabello más sano.</p>
+
+    <div class="uso-carousel">
+      <div class="uso-slides" id="usoSlides">
+        <div class="uso-slide">
+          <div class="slide-num">01</div>
+          <div class="slide-title">Shampoo</div>
+          <p class="slide-body">Aplica en cuero cabelludo húmedo, masajea suavemente con las yemas de los dedos y enjuaga con agua tibia. Repite si lo necesitas.</p>
+        </div>
+        <div class="uso-slide">
+          <div class="slide-num">02</div>
+          <div class="slide-title">Acondicionador</div>
+          <p class="slide-body">Aplica en medios y puntas después del shampoo. Deja actuar 2–3 minutos para que los nutrientes penetren la fibra capilar. Enjuaga con agua fría.</p>
+        </div>
+        <div class="uso-slide">
+          <div class="slide-num">03</div>
+          <div class="slide-title">Aceite Capilar</div>
+          <p class="slide-body">Aplica la noche anterior al lavado, directamente en el cuero cabelludo, ejerciendo masajes suaves con las yemas de los dedos. Al día siguiente lava normalmente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-nav">
+      <button class="c-arrow" onclick="prevSlide()" aria-label="Anterior">&#8249;</button>
+      <div class="c-dots">
+        <div class="dot active" id="dot0" onclick="goSlide(0)"></div>
+        <div class="dot" id="dot1" onclick="goSlide(1)"></div>
+        <div class="dot" id="dot2" onclick="goSlide(2)"></div>
+      </div>
+      <button class="c-arrow" onclick="nextSlide()" aria-label="Siguiente">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRECIOS ── -->
+<section id="precios" class="pricing-section">
+  <div class="pricing-inner">
+    <div style="text-align:center">
+      <div class="eyebrow">Precios</div>
+      <h2 class="sec-title">Elige tu rutina</h2>
+      <p style="color:var(--texto-suave);font-size:.95rem">Compra el kit completo o arma tu rutina con productos individuales.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <span class="rec-badge">Recomendado</span>
+        <div class="price-name">Kit Trilogía A-Natural</div>
+        <div class="price-sub">Shampoo + Acondicionador + Aceite capilar</div>
+        <div class="price-amount"><span class="price-cur">$</span>70.000</div>
+        <div class="price-cop">COP</div>
+        <ul class="price-features">
+          <li>Rutina completa · 3 productos</li>
+          <li>Ideal para uso continuo</li>
+          <li>Mejor relación costo-beneficio</li>
+          <li>Ahorras $15.000 vs compra individual</li>
+        </ul>
+        <a class="btn-buy" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Kit%20Trilog%C3%ADa%20A-Natural%20%28%2470.000%29%20%F0%9F%8C%BF">Comprar kit</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Shampoo</div>
+        <div class="price-sub">Individual</div>
+        <div class="price-amount"><span class="price-cur">$</span>35.000</div>
+        <div class="price-cop">COP</div>
+        <a class="btn-buy" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Shampoo%20Trilog%C3%ADa%20A-Natural%20%28%2435.000%29">Comprar</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Acondicionador</div>
+        <div class="price-sub">Individual</div>
+        <div class="price-amount"><span class="price-cur">$</span>30.000</div>
+        <div class="price-cop">COP</div>
+        <a class="btn-buy" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Acondicionador%20Trilog%C3%ADa%20A-Natural%20%28%2430.000%29">Comprar</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Aceite Capilar</div>
+        <div class="price-sub">Individual</div>
+        <div class="price-amount"><span class="price-cur">$</span>20.000</div>
+        <div class="price-cop">COP</div>
+        <a class="btn-buy" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20comprar%20el%20Aceite%20capilar%20Trilog%C3%ADa%20A-Natural%20%28%2420.000%29">Comprar</a>
+      </div>
+    </div>
+
+    <p class="pricing-note"><strong>Nota:</strong> Los 3 productos están diseñados para complementarse y funcionan mejor juntos como rutina completa.</p>
+  </div>
+</section>
+
+<!-- ── MÉTODOS DE PAGO ── -->
+<section id="pago" class="payment-section">
+  <div class="payment-inner">
+    <div class="eyebrow">Pagos</div>
+    <h2 class="sec-title">Métodos de pago</h2>
+    <p style="color:var(--texto-suave);font-size:.95rem">Facilitamos el pago para que tu pedido llegue lo más pronto posible.</p>
+    <div class="payment-grid">
+      <div class="pay-card">
+        <div class="pay-ico">💵</div>
+        <div>
+          <h4>Efectivo</h4>
+          <p>Pago contra entrega o al momento de recibir tu pedido.</p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-ico">📱</div>
+        <div>
+          <h4>Nequi</h4>
+          <p>Transferencia rápida y segura.<br><span class="pay-key">Llave: 3002710490</span></p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-ico">🏦</div>
+        <div>
+          <h4>Transferencia bancaria</h4>
+          <p>Solicita los datos por WhatsApp para coordinar tu pago.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA / CONTACTO ── -->
+<section id="comprar" class="cta-section">
+  <div class="eyebrow" style="color:rgba(255,255,255,.5)">Contáctanos</div>
+  <h2 class="sec-title">¿Lista para empezar<br>tu rutina natural?</h2>
+  <p>Escríbenos por WhatsApp y coordinamos tu pedido. Respondemos rápido.</p>
+  <div class="contact-row">
+    <div class="contact-item">
+      <small>WhatsApp</small>
+      <a href="https://wa.me/573002710490">+57 300 271 0490</a>
+    </div>
+    <div class="contact-item">
+      <small>Instagram</small>
+      <a href="https://www.instagram.com/trilogianaturaljjm/">@trilogia.a.natural</a>
+    </div>
+    <div class="contact-item">
+      <small>Email</small>
+      <a href="mailto:trilogia.a.natural@gmail.com">trilogia.a.natural@gmail.com</a>
+    </div>
+  </div>
+  <a class="btn-wa" href="https://wa.me/573002710490?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Trilog%C3%ADa%20A-Natural%20%F0%9F%8C%BF">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Enviar mensaje por WhatsApp
+  </a>
+  <p class="cta-note">Respondemos rápido · Envíos a toda Colombia</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2025 Trilogía A-Natural · Amor, Belleza y Cuidado · <a href="https://www.instagram.com/trilogianaturaljjm/">Instagram</a></p>
+</footer>
+
+<script>
+  // ── ANNOUNCEMENT BAR rotation ──
+  const annMsgs = document.querySelectorAll('.ann-msg');
+  let annIdx = 0;
+  setInterval(() => {
+    annMsgs[annIdx].classList.remove('active');
+    annIdx = (annIdx + 1) % annMsgs.length;
+    annMsgs[annIdx].classList.add('active');
+  }, 4000);
+
+  // ── STICKY BAR on scroll ──
+  const stickyBar = document.getElementById('stickyBar');
+  const heroEl = document.getElementById('inicio');
+  window.addEventListener('scroll', () => {
+    stickyBar.classList.toggle('visible', heroEl.getBoundingClientRect().bottom < 0);
+  }, { passive: true });
+
+  // ── THUMBNAIL switch ──
+  const heroImages = [
+    { src: 'images/img4.jpg', alt: 'Kit completo Trilogía A-Natural' },
+    { src: 'images/img5.jpg', alt: 'Shampoo Natural Trilogía' },
+    { src: 'images/img3.jpg', alt: 'Acondicionador Natural Trilogía' },
+    { src: 'images/img6.jpg', alt: 'Aceite Capilar Trilogía' },
+  ];
+  function switchThumb(idx, el) {
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    const { src, alt } = heroImages[idx];
+    document.getElementById('mainImgWrap').innerHTML = `<img src="${src}" alt="${alt}" />`;
+  }
+
+  // ── DESCRIPTION expand ──
+  function toggleDesc() {
+    const extra = document.getElementById('desc-extra');
+    const btn = document.getElementById('expandBtn');
+    const open = extra.style.display === 'none';
+    extra.style.display = open ? 'block' : 'none';
+    btn.textContent = open ? 'Mostrar menos −' : 'Mostrar más +';
+  }
+
+  // ── CAROUSEL ──
+  let current = 0;
+  const total = 3;
+  function goSlide(idx) {
+    current = idx;
+    document.getElementById('usoSlides').style.transform = `translateX(-${idx * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+  function nextSlide() { goSlide((current + 1) % total); }
+  function prevSlide() { goSlide((current - 1 + total) % total); }
+
+  // auto-advance carousel every 5s
+  setInterval(nextSlide, 5000);
+</script>
+
+</body>
+</html>
