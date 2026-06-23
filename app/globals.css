@@ -78,7 +78,7 @@ a:focus-visible {
 
 /* ── Hero type ── */
 .hero-display {
-  font-size: clamp(4.8rem, 13vw, 13.5rem);
+  font-size: clamp(3.2rem, 12vw, 13.5rem);
   line-height: 0.88;
   letter-spacing: -0.02em;
   font-weight: 900;
