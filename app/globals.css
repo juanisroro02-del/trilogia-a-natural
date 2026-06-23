@@ -78,12 +78,12 @@ a:focus-visible {
 
 /* ── Hero type ── */
 .hero-display {
-  font-size: clamp(3.4rem, 12vw, 13.5rem);
-  line-height: 0.82;
-  letter-spacing: 0.06em;
+  font-size: clamp(3.4rem, 13vw, 14rem);
+  line-height: 0.78;
+  letter-spacing: 0.12em;
   font-weight: 900;
   text-transform: uppercase;
-  -webkit-text-stroke: 0.5px currentColor;
+  -webkit-text-stroke: 1px currentColor;
 }
 .hero-sub {
   font-size: clamp(2rem, 5.5vw, 5.8rem);
